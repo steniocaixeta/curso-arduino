@@ -1,0 +1,73 @@
+int pinVermelho=10;
+int pinAmarelo=9;
+int pinVerde=8;
+int pinBotao=7;
+int faseSemaforo=1;
+int estadoBotao;
+int pinPedestreVermelho=3;
+int pinPedestreVerde=2;
+int i;
+
+void setup() {
+pinMode(pinVerde,OUTPUT);
+pinMode(pinAmarelo,OUTPUT);
+pinMode(pinVermelho,OUTPUT);
+pinMode(pinBotao,INPUT);
+pinMode(pinPedestreVerde,OUTPUT);
+pinMode(pinPedestreVermelho,OUTPUT);
+faseSemaforo= 1;
+
+}
+void loop() {
+
+estadoBotao = digitalRead(pinBotao);
+for (estadoBotao=1;estadoBotao<3;estadoBotao++)
+{
+  delay(200);
+if (estadoBotao == HIGH){
+      if (faseSemaforo<3) {
+        faseSemaforo = faseSemaforo + 1;
+        } else   {
+     faseSemaforo = 1;
+     }
+
+
+if (faseSemaforo==1) // SEMAFORO ABERTO - VERDE E FECHADO PARA PEDESTRE
+     {
+     digitalWrite(pinVerde,HIGH);
+     digitalWrite(pinAmarelo,LOW);
+     digitalWrite(pinVermelho,LOW);
+     digitalWrite(pinPedestreVermelho,HIGH);
+     digitalWrite(pinPedestreVerde,LOW);
+          delay(10000);
+     }
+if (faseSemaforo==2) // SEMAFORO AMARELO E FECHADO PARA PEDESTRE
+    {
+    digitalWrite(pinVerde,LOW);
+    digitalWrite(pinAmarelo,HIGH);
+    digitalWrite(pinVermelho,LOW);
+     digitalWrite(pinPedestreVermelho,HIGH);
+     digitalWrite(pinPedestreVerde,LOW);
+   delay(4000);
+   for(i=1;i<10;i++){
+   digitalWrite(pinAmarelo,LOW);
+   delay(200);
+   digitalWrite(pinAmarelo,HIGH);
+   delay(200);
+   }
+}
+
+if ( faseSemaforo == 3) // SEMAFORO FECHADO - VERMELHO E ABERTO PARA PEDESTRE
+    {
+    digitalWrite(pinVerde,LOW);
+    digitalWrite(pinAmarelo,LOW);
+    digitalWrite(pinVermelho,HIGH);
+    digitalWrite(pinPedestreVermelho,LOW);
+    digitalWrite(pinPedestreVerde,HIGH);
+        delay(10000);
+     }
+ 
+}
+}
+}
+
